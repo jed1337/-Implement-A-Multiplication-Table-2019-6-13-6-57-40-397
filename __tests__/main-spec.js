@@ -94,21 +94,21 @@ it ('should create a multiplication with the end = start+2. 2 digit input', () =
    expect(result).toBe(expectedOutput);
 });
 
-it ('should return null if start is greater than end', () => {
+it ('should return null when creating the multiplication table if start is greater than end', () => {
 	const start=10;
 	const end=2;
 	const result = output.getMultiplicationTable(start, end);
    expect(result).toBe(null);
 });
 
-it ('should return null if an start is one', () => {
+it ('should return null when creating the multiplication table if start is one', () => {
 	const start=10;
 	const end=1;
 	const result = output.getMultiplicationTable(start, end);
    expect(result).toBe(null);
 });
 
-it ('should return null if an start is one thousand one', () => {
+it ('should return null when creating the multiplication table if end is greater than 1000', () => {
 	const start=1001;
 	const end=1337;
 	const result = output.getMultiplicationTable(start, end);
