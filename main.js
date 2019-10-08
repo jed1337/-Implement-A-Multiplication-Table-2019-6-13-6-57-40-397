@@ -11,7 +11,7 @@ function getMultiplicationTable(start, inclusiveEnd){
 
 	let multiplicationTable = "";
 	for(let currentColumn = start; currentColumn<=inclusiveEnd; currentColumn++){
-		multiplicationTable+=getMultiplicationRow(start, currentColumn);
+		multiplicationTable+=getMultiplicationRow(start, currentColumn, inclusiveEnd);
 		multiplicationTable+="\n";
 	}
 	return multiplicationTable;
@@ -25,22 +25,27 @@ function withinTwoAndOneThousand(input){
 	return input >=2 && input <=1000;
 }
 
-function getMultiplicationRow(inclusiveStart, inclusiveEnd){
+function getMultiplicationRow(inclusiveStart, inclusiveEnd, paddingNumber){
 	let multiplicationRow = "";
 	for(let current = inclusiveStart; current<=inclusiveEnd; current++){
-		multiplicationRow+=getSingleMultiplication(current, inclusiveEnd)+" ";
+		multiplicationRow+=getPaddedSingleMultiplication(current, inclusiveEnd, paddingNumber)+" ";
 	}
 	return multiplicationRow;
 }
 
-function getSingleMultiplication(currentRow, currentColumn){
-	return `${currentRow}*${currentColumn}=${currentRow*currentColumn}`;
+function getPaddedSingleMultiplication(currentRow, currentColumn, paddingNumber){
+	const paddingLength = paddingNumber.toString().length
+	const largestPaddingString = (paddingNumber*paddingNumber).toString().length;
+
+	const paddedCurrentRow=currentRow.toString().padStart(paddingLength, ' ');
+	const paddedResult = (currentRow*currentColumn).toString().padEnd(largestPaddingString, ' ');
+	return `${paddedCurrentRow}*${currentColumn}=${paddedResult}`;
 }
 
 module.exports = {
 	startIsNotGreaterThanEnd: startIsNotGreaterThanEnd,
 	withinTwoAndOneThousand: withinTwoAndOneThousand,
-	getSingleMultiplication: getSingleMultiplication,
 	getMultiplicationRow: getMultiplicationRow,
+	getPaddedSingleMultiplication: getPaddedSingleMultiplication,
 	getMultiplicationTable: getMultiplicationTable
 };
